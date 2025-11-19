@@ -1,0 +1,285 @@
+/* Import Stack Sans Text font */
+@import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap');
+
+/* Common styles for all views */
+
+/* Font family used across all views */
+.font-lexend {
+  font-family: 'Lexend', sans-serif;
+}
+
+/* Stack Sans Text font classes */
+.stack-sans-text-thin {
+  font-family: "Stack Sans Text", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.stack-sans-text-extralight {
+  font-family: "Stack Sans Text", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.stack-sans-text-light {
+  font-family: "Stack Sans Text", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.stack-sans-text-regular {
+  font-family: "Stack Sans Text", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.stack-sans-text-medium {
+  font-family: "Stack Sans Text", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.stack-sans-text-semibold {
+  font-family: "Stack Sans Text", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.stack-sans-text-bold {
+  font-family: "Stack Sans Text", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Common container dimensions with responsive adjustments */
+.app-container {
+  width: 100%;
+  height: 100%;
+  max-width: 440px;
+  max-height: 956px;
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto; /* Center the container */
+}
+
+/* Responsive container that maintains aspect ratio */
+.responsive-container {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header styles */
+.header {
+  height: 43px;
+  background-color: rgb(70, 152, 202);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-title {
+  color: white;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: capitalize;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.menu-icon {
+  margin-left: auto;
+}
+
+.menu-icon svg {
+  fill: white;
+}
+
+/* Footer styles */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 59px;
+  background-color: rgb(70, 152, 202);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-button {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.footer-button svg {
+  fill: rgb(70, 152, 202);
+  margin-right: 10px;
+}
+
+/* Text styles */
+.text-bold {
+  font-weight: 600;
+}
+
+.text-medium {
+  font-weight: 400;
+}
+
+.text-light {
+  font-weight: 300;
+}
+
+.text-transform-capitalize {
+  text-transform: capitalize;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Button styles */
+.button-primary {
+  background-color: rgb(70, 152, 202);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.button-primary:hover {
+  background-color: rgb(60, 142, 192);
+}
+
+.button-primary:active {
+  background-color: rgb(50, 132, 182);
+  transform: scale(0.98);
+}
+
+/* Responsive adjustments for different screen sizes */
+@media (max-width: 480px) {
+  .app-container {
+    max-width: 100%;
+    max-height: 100vh;
+  }
+  
+  .header-title {
+    font-size: 20px;
+  }
+  
+  .footer-button {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .app-container {
+    max-width: 100%;
+    max-height: 100vh;
+  }
+  
+  .header-title {
+    font-size: 18px;
+  }
+  
+  .footer-button {
+    font-size: 18px;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .app-container {
+    max-width: 100%;
+    max-height: 100vh;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .header {
+    height: 50px;
+  }
+  
+  .footer {
+    height: 60px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .app-container {
+    max-width: 440px;
+    max-height: 956px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .app-container {
+    max-width: 440px;
+    max-height: 956px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .app-container {
+    max-width: 440px;
+    max-height: 956px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .app-container {
+    max-width: 440px;
+    max-height: 956px;
+  }
+}
+
+/* Orientation specific styles */
+@media screen and (orientation: landscape) {
+  .app-container {
+    max-width: 956px;
+    max-height: 440px;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .app-container {
+    max-width: 440px;
+    max-height: 956px;
+  }
+}
