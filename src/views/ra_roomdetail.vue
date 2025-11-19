@@ -13,7 +13,7 @@
           <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" fill="white" />
         </svg>
       </div>
-      <div class="header-title">1302</div>
+      <div class="header-title">{{ roomNumber }}</div>
       <div class="header-spacer"></div>
       <!-- Spacer for centering -->
     </div>
@@ -21,26 +21,48 @@
     <div class="content-scrollable">
       <!-- Status Buttons Row -->
       <div class="status-buttons-row">
-        <div class="status-badge occupied">
+        <div class="status-badge occupied" v-if="roomData && roomData.status_fo === 'Occupied'">
           <span class="stack-sans-text-medium">Occupied</span>
         </div>
-        <div class="status-badge dirty">
+        <div class="status-badge vacant" v-else-if="roomData && roomData.status_fo === 'Vacant'">
+          <span class="stack-sans-text-medium">Vacant</span>
+        </div>
+        <div class="status-badge dirty" v-if="roomData && roomData.status_hk === 'Dirty'">
           <span class="stack-sans-text-medium">Dirty</span>
+        </div>
+        <div class="status-badge clean" v-else-if="roomData && roomData.status_hk === 'Clean'">
+          <span class="stack-sans-text-medium">Clean</span>
         </div>
       </div>
 
       <!-- Guest Info Section -->
-      <div class="guest-info-section">
-        <div class="guest-name stack-sans-text-semibold">John Doe, Mr</div>
+      <div class="guest-info-section" v-if="roomData">
+        <div class="guest-name stack-sans-text-semibold">{{ roomData.guestname }}</div>
 
         <div class="dates-row">
           <div class="date-group left">
             <div class="date-label stack-sans-text-medium">Arrival</div>
-            <div class="date-value stack-sans-text-semibold">01-Nov-25</div>
+            <div class="date-value stack-sans-text-semibold">
+              {{
+                formatDate(
+                  typeof roomData.arrivaldate === 'string'
+                    ? roomData.arrivaldate
+                    : roomData.arrivaldate?.toString(),
+                )
+              }}
+            </div>
           </div>
           <div class="date-group right">
             <div class="date-label stack-sans-text-medium">Departure</div>
-            <div class="date-value stack-sans-text-semibold">02-Nov-25</div>
+            <div class="date-value stack-sans-text-semibold">
+              {{
+                formatDate(
+                  typeof roomData.departuredate === 'string'
+                    ? roomData.departuredate
+                    : roomData.departuredate?.toString(),
+                )
+              }}
+            </div>
           </div>
         </div>
       </div>
@@ -64,13 +86,13 @@
       <!-- Room Message -->
       <div class="input-section">
         <div class="section-label stack-sans-text-semibold">Room Message</div>
-        <div class="text-area-box"></div>
+        <div class="text-area-box">{{ roomData?.noteroommessage || 'No message' }}</div>
       </div>
 
       <!-- Guest Preference -->
       <div class="input-section">
         <div class="section-label stack-sans-text-semibold">Guest Preference</div>
-        <div class="text-area-box"></div>
+        <div class="text-area-box">{{ roomData?.noteprefer || 'No preference' }}</div>
       </div>
 
       <!-- Footer Buttons -->
@@ -83,13 +105,50 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useRoomStore } from '../stores/roomdata'
+import { callApiDetailRoom } from '../api/api'
+import type { RoomDetail } from '../types/api.RoomDetail'
 
 const router = useRouter()
+const route = useRoute()
+
+// Get the room number from the route parameter
+const roomNumber = computed(() => route.params.roomNumber as string)
+
+// Get room data from the store
+const store = useRoomStore()
+const roomData = computed(() => store.RoomData as RoomDetail | null)
+
+// Fetch room data when component mounts or room number changes
+onMounted(async () => {
+  if (roomNumber.value) {
+    await fetchRoomData(roomNumber.value)
+  }
+})
+
+// Watch for room number changes and fetch new data
+watch(roomNumber, async (newRoomNumber) => {
+  if (newRoomNumber) {
+    await fetchRoomData(newRoomNumber)
+  }
+})
+
+const fetchRoomData = async (roomNum: string) => {
+  try {
+    // Fetch room data from API
+    const roomDetailData = await callApiDetailRoom(roomNum, roomNum)
+
+    // Store the data in the pinia store
+    store.setRoomData(roomDetailData)
+  } catch (error) {
+    console.error('Error fetching room detail:', error)
+  }
+}
 
 // Data Checkbox Kiri
-const leftFlags = ref([
+const leftFlags = [
   'Reject For Cleaning',
   'Double Lock',
   'No Luggage',
@@ -98,10 +157,10 @@ const leftFlags = ref([
   'VIP',
   'Complained',
   'Transaction Close',
-])
+]
 
 // Data Checkbox Kanan
-const rightFlags = ref([
+const rightFlags = [
   'DND Hanger',
   'Borrowed Item',
   'Repeater Guest',
@@ -109,10 +168,38 @@ const rightFlags = ref([
   'Honeymoon',
   'Request',
   'Locked Minibar',
-])
+]
 
 const goToRoomSearch = () => {
   router.push('/room-search')
+}
+
+const formatDate = (dateString: string | undefined) => {
+  if (!dateString) return 'N/A'
+  // Format date string to DD-MMM-YY format
+  try {
+    const date = new Date(dateString)
+    const day = date.getDate().toString().padStart(2, '0')
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ]
+    const month = months[date.getMonth()]
+    const year = date.getFullYear().toString().slice(-2)
+    return `${day}-${month}-${year}`
+  } catch {
+    return dateString // Return original if parsing fails
+  }
 }
 </script>
 
@@ -192,8 +279,16 @@ const goToRoomSearch = () => {
   background-color: #f2e8a5; /* Kuning Occupied */
 }
 
+.status-badge.vacant {
+  background-color: #d4edda; /* Hijau Vacant */
+}
+
 .status-badge.dirty {
   background-color: #4cb5f5; /* Biru Dirty */
+}
+
+.status-badge.clean {
+  background-color: #c3e6cb; /* Hijau Clean */
 }
 
 /* --- Guest Info --- */

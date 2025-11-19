@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { BASE_URL, STATIC_TOKEN } from '../config/config' // Import config
-import type { RoomStatus } from '../types/api.roomStatus' // Import types
-import type { DetailRoom } from '../types/api.DetailRoom' // Import types
+import type { RoomStatus } from '../types/api.RoomStatus' // Import types
+import type { RoomDetail } from '../types/api.RoomDetail' // Import types
 
 export const callApiRoomStatus = async (): Promise<RoomStatus> => {
   const token = STATIC_TOKEN
@@ -38,10 +38,10 @@ export const callApiRoomStatus = async (): Promise<RoomStatus> => {
 export const callApiDetailRoom = async (
   beginroom: string,
   endingroom: string,
-): Promise<DetailRoom> => {
+): Promise<RoomDetail> => {
   const token = STATIC_TOKEN
   // Using BASE_URL from config which will be configured for proxy
-  const apiUrl = `${BASE_URL}/room-detail`
+  const apiUrl = `${BASE_URL}/room-detail?`
 
   try {
     console.log('Making request to:', apiUrl, 'with params:', { token, beginroom, endingroom })

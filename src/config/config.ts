@@ -4,6 +4,6 @@
 export const BASE_URL =
   process.env.NODE_ENV === 'development'
     ? '/api'
-    : 'https://4b6475f372d2.ngrok-free.app/api/1.0/json/';
+    : 'https://62f8bbc66050.ngrok-free.app/api/1.0/json/'
 
-export const STATIC_TOKEN = 'ASKTHLPUWXNXSELGEABMBSOIX2X6GPOVWOOY92VSJ85GLXUY'; // Jika token static
+export const STATIC_TOKEN = 'ASKTHLPUWXNXSELGEABMBSOIX2X6GPOVWOOY92VSJ85GLXUY' // Jika token static

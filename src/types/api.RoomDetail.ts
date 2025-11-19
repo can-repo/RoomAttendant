@@ -1,4 +1,4 @@
-export interface DetailRoom {
+export interface RoomDetail {
   room: string
   folio: string
   status_hk: string

@@ -23,7 +23,12 @@
       <!-- Input Section -->
       <div class="input-row">
         <div class="input-label stack-sans-text-semibold">Room No.</div>
-        <input v-model="searchInput" type="text" class="room-input stack-sans-text-regular" readonly />
+        <input
+          v-model="searchInput"
+          type="text"
+          class="room-input stack-sans-text-regular"
+          readonly
+        />
       </div>
 
       <!-- Keypad Grid -->
@@ -69,9 +74,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { callApiDetailRoom } from '../api/api'
+import { useRoomStore } from '../stores/roomdata'
 
 const router = useRouter()
 const searchInput = ref('')
+const loading = ref(false)
+const error = ref<string | null>(null)
 
 // Logic untuk input angka
 const append = (num: string) => {
@@ -79,7 +88,7 @@ const append = (num: string) => {
 }
 
 // Logic untuk tombol aksi
-const action = (type: string) => {
+const action = async (type: string) => {
   switch (type) {
     case 'Clear':
       searchInput.value = ''
@@ -90,7 +99,25 @@ const action = (type: string) => {
     case 'OK':
       if (searchInput.value) {
         console.log('Searching:', searchInput.value)
-        router.push(`/room-detail/${searchInput.value}`)
+        loading.value = true
+        error.value = null
+
+        try {
+          // Call API with beginroom and endingroom as the same room number
+          const roomData = await callApiDetailRoom(searchInput.value, searchInput.value)
+
+          // Store the room data in the pinia store
+          const store = useRoomStore()
+          store.setRoomData(roomData)
+
+          // Navigate to room detail page
+          router.push(`/room-detail/${searchInput.value}`)
+        } catch (err) {
+          console.error('Error fetching room detail:', err)
+          error.value = 'Failed to fetch room detail. Please try again.'
+        } finally {
+          loading.value = false
+        }
       }
       break
     case 'List':
