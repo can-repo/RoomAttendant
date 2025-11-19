@@ -41,7 +41,7 @@ export const callApiDetailRoom = async (
 ): Promise<RoomDetail> => {
   const token = STATIC_TOKEN
   // Using BASE_URL from config which will be configured for proxy
-  const apiUrl = `${BASE_URL}/room-detail?`
+  const apiUrl = `${BASE_URL}/room-detail`
 
   try {
     console.log('Making request to:', apiUrl, 'with params:', { token, beginroom, endingroom })
