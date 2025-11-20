@@ -37,20 +37,20 @@ export const callApiRoomStatus = async (): Promise<RoomStatus> => {
 }
 
 export const callApiDetailRoom = async (
-  beginroom: string,
-  endingroom: string,
+  Sroom: string,
+  Eroom: string,
 ): Promise<RoomDetail> => {
   const token = STATIC_TOKEN
   // Using BASE_URL from config which will be configured for proxy
   const apiUrl = `${BASE_URL}/room-detail`
 
   try {
-    console.log('Making request to:', apiUrl, 'with params:', { token, beginroom, endingroom })
+    console.log('Making request to:', apiUrl, 'with params:', { token, Sroom, Eroom })
     const response = await axios.get(apiUrl, {
       params: {
         token,
-        Sroom:beginroom,
-        Eroom:endingroom,
+        Sroom,
+        Eroom,
       },
       headers: {
         'Content-Type': 'application/json',
