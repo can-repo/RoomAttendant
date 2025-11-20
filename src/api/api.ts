@@ -49,8 +49,8 @@ export const callApiDetailRoom = async (
     const response = await axios.get(apiUrl, {
       params: {
         token,
-        beginroom,
-        endingroom,
+        Sroom:beginroom,
+        Eroom:endingroom,
       },
       headers: {
         'Content-Type': 'application/json',
