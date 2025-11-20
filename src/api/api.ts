@@ -42,7 +42,7 @@ export const callApiDetailRoom = async (
 ): Promise<RoomDetail> => {
   const token = STATIC_TOKEN
   // Using BASE_URL from config which will be configured for proxy
-  const apiUrl = `${BASE_URL}/room-detail`
+  const apiUrl = `${BASE_URL}room-detail`
 
   try {
     console.log('Making request to:', apiUrl, 'with params:', { token, Sroom, Eroom })
@@ -53,6 +53,7 @@ export const callApiDetailRoom = async (
         Eroom,
       },
       headers: {
+        'ngrok-skip-browser-warning': 'true',  // Atau value lain, seperti 'true'
         'Content-Type': 'application/json',
       },
       // Add timeout and withCredentials if needed
