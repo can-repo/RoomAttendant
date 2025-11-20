@@ -53,6 +53,7 @@ export const callApiDetailRoom = async (
         Eroom,
       },
       headers: {
+        'Access-Control-Allow-Origin':'true',
         'ngrok-skip-browser-warning': 'true',  // Atau value lain, seperti 'true'
         'Content-Type': 'application/json',
       },
