@@ -15,7 +15,7 @@ export const callApiRoomStatus = async (): Promise<RoomStatus> => {
         token,
       },
       headers: {
-        'ngrok-skip-browser-warning': '1',  // Atau value lain, seperti 'true'
+        'ngrok-skip-browser-warning': 'true',  // Atau value lain, seperti 'true'
         'Content-Type': 'application/json',
       },
       timeout: 10000, // 10 second timeout
