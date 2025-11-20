@@ -15,6 +15,7 @@ export const callApiRoomStatus = async (): Promise<RoomStatus> => {
         token,
       },
       headers: {
+        'Access-Control-Allow-Origin':'https://room-attendant.vercel.app',
         'ngrok-skip-browser-warning': 'true',  // Atau value lain, seperti 'true'
         'Content-Type': 'application/json',
       },
@@ -53,7 +54,7 @@ export const callApiDetailRoom = async (
         Eroom,
       },
       headers: {
-        'Access-Control-Allow-Origin':'https://6166e37dd959.ngrok-free.app',
+        'Access-Control-Allow-Origin':'https://room-attendant.vercel.app',
         'ngrok-skip-browser-warning': 'true',  // Atau value lain, seperti 'true'
         'Content-Type': 'application/json',
       },
