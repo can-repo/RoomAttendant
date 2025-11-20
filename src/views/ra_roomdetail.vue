@@ -21,23 +21,23 @@
     <div class="content-scrollable">
       <!-- Status Buttons Row -->
       <div class="status-buttons-row">
-        <div class="status-badge occupied" v-if="roomData && roomData.status_fo === 'Occupied'">
+        <div class="status-badge occupied" v-if="roomData && roomData.StatusFO === 'Occupied'">
           <span class="stack-sans-text-medium">Occupied</span>
         </div>
-        <div class="status-badge vacant" v-else-if="roomData && roomData.status_fo === 'Vacant'">
+        <div class="status-badge vacant" v-else-if="roomData && roomData.StatusFO === 'Vacant'">
           <span class="stack-sans-text-medium">Vacant</span>
         </div>
-        <div class="status-badge dirty" v-if="roomData && roomData.status_hk === 'Dirty'">
+        <div class="status-badge dirty" v-if="roomData && roomData.StatusHK === 'Dirty'">
           <span class="stack-sans-text-medium">Dirty</span>
         </div>
-        <div class="status-badge clean" v-else-if="roomData && roomData.status_hk === 'Clean'">
+        <div class="status-badge clean" v-else-if="roomData && roomData.StatusHK === 'Clean'">
           <span class="stack-sans-text-medium">Clean</span>
         </div>
       </div>
 
       <!-- Guest Info Section -->
       <div class="guest-info-section" v-if="roomData">
-        <div class="guest-name stack-sans-text-semibold">{{ roomData.guestname }}</div>
+        <div class="guest-name stack-sans-text-semibold">{{ roomData.Guestname }}</div>
 
         <div class="dates-row">
           <div class="date-group left">
@@ -45,9 +45,9 @@
             <div class="date-value stack-sans-text-semibold">
               {{
                 formatDate(
-                  typeof roomData.arrivaldate === 'string'
-                    ? roomData.arrivaldate
-                    : roomData.arrivaldate?.toString(),
+                  typeof roomData.ArrivalDate === 'string'
+                    ? roomData.ArrivalDate
+                    : roomData.ArrivalDate?.toString(),
                 )
               }}
             </div>
@@ -57,9 +57,9 @@
             <div class="date-value stack-sans-text-semibold">
               {{
                 formatDate(
-                  typeof roomData.departuredate === 'string'
-                    ? roomData.departuredate
-                    : roomData.departuredate?.toString(),
+                  typeof roomData.DepatureDate === 'string'
+                    ? roomData.DepatureDate
+                    : roomData.DepatureDate?.toString(),
                 )
               }}
             </div>
@@ -86,13 +86,13 @@
       <!-- Room Message -->
       <div class="input-section">
         <div class="section-label stack-sans-text-semibold">Room Message</div>
-        <div class="text-area-box">{{ roomData?.noteroommessage || 'No message' }}</div>
+        <div class="text-area-box">{{ roomData?.NoteRoommessage || 'No message' }}</div>
       </div>
 
       <!-- Guest Preference -->
       <div class="input-section">
         <div class="section-label stack-sans-text-semibold">Guest Preference</div>
-        <div class="text-area-box">{{ roomData?.noteprefer || 'No preference' }}</div>
+        <div class="text-area-box">{{ roomData?.NotePrefer || 'No preference' }}</div>
       </div>
 
       <!-- Footer Buttons -->
