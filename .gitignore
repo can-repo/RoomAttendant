@@ -13,6 +13,8 @@ dist
 dist-ssr
 coverage
 *.local
+localtonet-win-64
+localtonet-win-64.zip
 
 # Editor directories and files
 .vscode/*
@@ -34,3 +36,5 @@ coverage
 
 # Vitest
 __screenshots__/
+
+

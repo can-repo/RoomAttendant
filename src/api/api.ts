@@ -15,6 +15,7 @@ export const callApiRoomStatus = async (): Promise<RoomStatus> => {
         token,
       },
       headers: {
+        'localtonet-skip-warning': 'true',
         'ngrok-skip-browser-warning': 'true',  // Atau value lain, seperti 'true'
         'Content-Type': 'application/json',
       },
@@ -53,6 +54,7 @@ export const callApiDetailRoom = async (
         Eroom,
       },
       headers: {
+        'localtonet-skip-warning': 'true',
         'ngrok-skip-browser-warning': 'true',  // Atau value lain, seperti 'true'
         'Content-Type': 'application/json',
       },
