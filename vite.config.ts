@@ -16,9 +16,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://6166e37dd959.ngrok-free.app',
+        target: 'http://localhost:8080',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/api/1.0/json'),
+        // NGINX will handle the rewrite to the actual API endpoint
       },
     },
   },

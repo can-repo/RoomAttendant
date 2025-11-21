@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  nginx-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    volumes:
+      - ./config/nginx-dev.conf:/etc/nginx/nginx.conf:ro

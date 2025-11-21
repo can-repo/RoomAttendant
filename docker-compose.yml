@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  nginx-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  vue-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.vue  # You would need to create this
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - nginx-proxy
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+
+networks:
+  app-network:
+    driver: bridge
